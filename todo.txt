@@ -1,0 +1,5 @@
+
+il faut gérer l'épaisseur du trait
+
+il faut vérifier dans les méthodes que la couleur envoyée ainsi que l'épaisseur du trait est valable par 
+rapport à une liste attendue

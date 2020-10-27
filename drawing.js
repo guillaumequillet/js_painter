@@ -50,9 +50,11 @@ class Drawing {
     }
 
     getCoordinates(e) {
-        const x = e.clientX - this.canvas.offsetLeft; 
-        const y = e.clientY - this.canvas.offsetTop;
-        return { x, y }; 
+        const boundingBox = this.canvas.getBoundingClientRect();
+        return {
+            x: (e.clientX - boundingBox.left),
+            y: (e.clientY - boundingBox.top)
+        };
     }
 
     reset() {
