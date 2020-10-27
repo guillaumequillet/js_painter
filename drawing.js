@@ -54,4 +54,8 @@ class Drawing {
         const y = e.clientY - this.canvas.offsetTop;
         return { x, y }; 
     }
+
+    reset() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 }

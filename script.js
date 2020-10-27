@@ -1,3 +1,8 @@
 window.onload = () => {
-    new Drawing("#canvas");
+    const drawing = new Drawing("#canvas");
+
+    document.querySelector("#reset").addEventListener("click", (e) => {
+        e.preventDefault();
+        drawing.reset();
+    });
 }
