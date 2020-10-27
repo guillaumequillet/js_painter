@@ -26,15 +26,25 @@ class Drawing {
         this.canvas.addEventListener('mousedown', (e) => {
             this.drawing = true;
             this.previousPosition = this.getCoordinates(e);
+
+            const step = {
+                'type': 'line',
+                'color': this.lineColor,
+                'width': this.lineWidth,
+                'originX': this.previousPosition.x,
+                'originY': this.previousPosition.y,
+                'points': []
+            };
+
+            this.steps.push(step);
+            this.cursor++;
         });
 
         this.canvas.addEventListener('mousemove', (e) => {
             if (this.drawing) {
                 const newPosition = this.getCoordinates(e);
-                const line = new Line(this.previousPosition, newPosition, this.lineColor, this.lineWidth);
-                line.draw(this.ctx);
-                this.steps.push(line);
-                this.cursor++;
+                this.drawLine(this.previousPosition, newPosition, this.lineColor, this.lineWidth);
+                this.steps[this.steps.length - 1].points.push(newPosition);
                 this.previousPosition.x = newPosition.x;
                 this.previousPosition.y = newPosition.y;
             }
@@ -55,6 +65,15 @@ class Drawing {
             x: (e.clientX - boundingBox.left),
             y: (e.clientY - boundingBox.top)
         };
+    }
+
+    drawLine(pointA, pointB, color, width) {
+        this.ctx.lineWidth = width;
+        this.ctx.strokeStyle = color;
+        this.ctx.beginPath();
+        this.ctx.moveTo(pointA.x, pointA.y);
+        this.ctx.lineTo(pointB.x, pointB.y);
+        this.ctx.stroke();
     }
 
     reset() {
