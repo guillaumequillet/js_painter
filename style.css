@@ -1,3 +1,12 @@
 canvas {
     border: 1px solid black;
 }
+
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+li {
+    list-style-type: none;
+}

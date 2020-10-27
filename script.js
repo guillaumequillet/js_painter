@@ -5,4 +5,8 @@ window.onload = () => {
         e.preventDefault();
         drawing.reset();
     });
+
+    document.querySelector("select#color").addEventListener("change", (e) => {
+        drawing.setColor(e.target.value);
+    });
 }

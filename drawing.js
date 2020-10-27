@@ -58,4 +58,8 @@ class Drawing {
     reset() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+
+    setColor(color) {
+        this.lineColor = color;
+    }
 }
