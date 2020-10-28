@@ -3,8 +3,6 @@ class Drawing {
     ctx;
     drawing = false;
     previousPosition;
-    steps;
-    cursor;
     lineWidth;
     lineColor;
 
@@ -20,31 +18,24 @@ class Drawing {
     getCanvas(canvasId) {
         this.canvas = document.querySelector(canvasId);
         this.ctx = this.canvas.getContext('2d');    
+
+        // set style for pixelated render
+        this.canvas.style = "image-rendering: pixelated;"
+        this.canvas.style.width = this.canvas.width + " px"
+        this.canvas.style.height = this.canvas.height + " px"
     }
 
     setListeners() {
         this.canvas.addEventListener('mousedown', (e) => {
             this.drawing = true;
             this.previousPosition = this.getCoordinates(e);
-
-            const step = {
-                'type': 'line',
-                'color': this.lineColor,
-                'width': this.lineWidth,
-                'originX': this.previousPosition.x,
-                'originY': this.previousPosition.y,
-                'points': []
-            };
-
-            this.steps.push(step);
-            this.cursor++;
         });
 
         this.canvas.addEventListener('mousemove', (e) => {
             if (this.drawing) {
                 const newPosition = this.getCoordinates(e);
                 this.drawLine(this.previousPosition, newPosition, this.lineColor, this.lineWidth);
-                this.steps[this.steps.length - 1].points.push(newPosition);
+                
                 this.previousPosition.x = newPosition.x;
                 this.previousPosition.y = newPosition.y;
             }
@@ -73,6 +64,7 @@ class Drawing {
         this.ctx.beginPath();
         this.ctx.moveTo(pointA.x, pointA.y);
         this.ctx.lineTo(pointB.x, pointB.y);
+        this.ctx.closePath();
         this.ctx.stroke();
     }
 
@@ -82,5 +74,9 @@ class Drawing {
 
     setColor(color) {
         this.lineColor = color;
+    }
+    
+    setWidth(width) {
+        this.lineWidth = width;
     }
 }
