@@ -10,7 +10,6 @@ class Drawing {
         this.getCanvas(canvasId);
         this.setListeners();
         this.steps = [];
-        this.cursor = 0;
         this.lineWidth = 1;
         this.lineColor = 'black';
     } 
@@ -20,9 +19,9 @@ class Drawing {
         this.ctx = this.canvas.getContext('2d');    
 
         // set style for pixelated render
-        this.canvas.style = "image-rendering: pixelated;"
-        this.canvas.style.width = this.canvas.width + " px"
-        this.canvas.style.height = this.canvas.height + " px"
+        this.canvas.style = 'image-rendering: pixelated;'
+        this.canvas.style.width = this.canvas.width + ' px'
+        this.canvas.style.height = this.canvas.height + ' px'
     }
 
     setListeners() {
